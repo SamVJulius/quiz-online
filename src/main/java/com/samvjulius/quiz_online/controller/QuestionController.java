@@ -8,8 +8,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -58,5 +57,24 @@ public class QuestionController {
     {
         questionService.deleteQuestion(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/subjects")
+    public ResponseEntity<List<String>> getAllSubjects()
+    {
+        List<String> allSubjects = questionService.getAllSubjects();
+        return ResponseEntity.ok(allSubjects);
+    }
+
+    @GetMapping("/fetch-questions-for-user")
+    public ResponseEntity<List<Question>> getQuestionsForUser(@RequestParam int numOfQuestions,
+                                                              @RequestParam String subject)
+    {
+        List<Question> allQuestions = questionService.getQuestionsForUser(numOfQuestions, subject);
+        List<Question> mutableList = new ArrayList<>(allQuestions);
+        Collections.shuffle(mutableList);
+        int availableQuestions = Math.min(numOfQuestions, mutableList.size());
+        List<Question> randomQuestions = mutableList.subList(0, availableQuestions);
+        return ResponseEntity.ok(randomQuestions);
     }
 }
