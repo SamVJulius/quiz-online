@@ -16,15 +16,11 @@ This is the backend service for the Quiz Application, which allows users to crea
   - Score calculation upon quiz completion
 - **Database Integration**
   - Uses MySQL for storing quiz questions and user data
-- **Email Notifications** (Optional)
-  - Users may receive quiz results via email
 
 ## Tech Stack
 - **Backend Framework:** Spring Boot
 - **Database:** MySQL
 - **ORM:** Hibernate
-- **Security:** Spring Security with JWT authentication
-- **Email Service:** SMTP (for notifications, if enabled)
 - **API Documentation:** Swagger
 
 ## Installation & Setup
